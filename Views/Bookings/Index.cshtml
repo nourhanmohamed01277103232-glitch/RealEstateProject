@@ -1,0 +1,75 @@
+﻿
+@model List<RealEstateProject.Models.Booking>
+@{
+    ViewData["Title"] = "الحجوزات";
+}
+
+<section class="container py-5">
+    <h2 class="fw-bold mb-4">📋 كل الحجوزات</h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">مفيش حجوزات لسه.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle bg-white">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>الاسم</th>
+                        <th>التليفون</th>
+                        <th>الإيميل</th>
+                        <th>الوحدة</th>
+                        <th>نوع الوحدة</th>
+                        <th>المقدم</th>
+                        <th>التاريخ</th>
+                        <th>ملاحظات</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model)
+                    {
+                        <tr>
+                            <td>@b.BookingID</td>
+                            <td>@b.FullName</td>
+                            <td>
+                                <a href="tel:@b.Phone" class="text-decoration-none">@b.Phone</a>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(b.Email))
+                                {
+                                    <a href="mailto:@b.Email" class="text-decoration-none">@b.Email</a>
+                                }
+                            </td>
+                            <td>
+                                @if (b.PropertyID.HasValue && !string.IsNullOrEmpty(b.PropertyTitle))
+                                {
+                                    <a asp-controller="Properties" asp-action="Details" asp-route-id="@b.PropertyID" class="text-decoration-none">
+                                        @b.PropertyTitle
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                            </td>
+                            <td>@b.UnitType</td>
+                            <td>@(b.DownPayment?.ToString("N0") ?? "—") ج.م</td>
+                            <td>@b.BookingDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@b.Notes</td>
+                            <td>
+                                <form asp-action="Delete" asp-route-id="@b.BookingID" method="post" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('متأكد من حذف الحجز؟')">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

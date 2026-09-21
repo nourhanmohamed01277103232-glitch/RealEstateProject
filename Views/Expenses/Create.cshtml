@@ -1,0 +1,26 @@
+﻿@model RealEstateProject.Models.CompanyExpense
+@{
+    ViewData["Title"] = "إضافة مصروف";
+}
+
+<section class="container py-5" style="max-width:600px;">
+    <h2 class="fw-bold mb-4 section-title">إضافة مصروف جديد</h2>
+
+    <form asp-controller="Expenses" asp-action="Create" method="post">
+        <div class="mb-3">
+            <label class="form-label fw-bold">الوصف</label>
+            <input asp-for="Description" class="form-control" required placeholder="مثال: شراء كرسي مكتب" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">المبلغ</label>
+            <input asp-for="Amount" type="number" step="0.01" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold">التاريخ</label>
+            <input asp-for="ExpenseDate" type="date" class="form-control" />
+        </div>
+        <p class="text-muted small">هيتقسم المبلغ تلقائيًا على الشركاء الأربعة حسب نسبة ملكية كل واحد.</p>
+        <button type="submit" class="btn btn-primary w-100">حفظ</button>
+        <a asp-controller="Expenses" asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">إلغاء</a>
+    </form>
+</section>

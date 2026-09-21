@@ -1,0 +1,49 @@
+﻿
+@model RealEstateProject.Models.Project
+
+@{
+    ViewData["Title"] = "إضافة مشروع";
+}
+
+<h2>إضافة مشروع جديد</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label class="form-label">اسم المشروع</label>
+        <input asp-for="ProjectName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">الموقع</label>
+        <input asp-for="Location" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">نسبة الشركة (%)</label>
+        <input asp-for="CompanySharePercentage" class="form-control" type="number" step="0.01" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">المبلغ المستثمر</label>
+        <input asp-for="InvestedAmount" class="form-control" type="number" step="0.01" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">طريقة الدفع</label>
+        <input asp-for="PaymentMethod" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">تاريخ البدء</label>
+        <input asp-for="StartDate" class="form-control" type="date" required />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">الحالة</label>
+        <select asp-for="Status" class="form-control">
+            <option value="قيد التنفيذ">قيد التنفيذ</option>
+            <option value="مكتمل">مكتمل</option>
+            <option value="متوقف">متوقف</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">ملاحظات</label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">حفظ</button>
+    <a asp-action="Index" class="btn btn-secondary">رجوع</a>
+</form>

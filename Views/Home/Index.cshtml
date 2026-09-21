@@ -1,0 +1,325 @@
+@model List<RealEstateProject.Models.Property>
+@{
+    ViewData["Title"] = "استكشف بيتك الجديد";
+}
+
+<!-- ====== قسم الهيرو (البحث) ====== -->
+<section class="hero-section text-white text-center">
+    <div class="hero-slide active" style="background-image:url('/images/hero-bg.png')"></div>
+    <div class="hero-slide" style="background-image:url('/images/hero-question.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/hero-builder.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/hero-slide-1.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/hero-slide-2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('/images/hero-slide-3.jpg')"></div>
+
+    <div class="hero-overlay">
+        <div class="container py-5">
+            <h2 class="fw-bold company-name-hero mb-2">رواسي للتطوير العقاري</h2>
+            <h1 class="fw-bold display-5 mb-2">استكشف بيتك الجديد</h1>
+            <p class="lead mb-4">للبيع أو الإيجار</p>
+
+            <form class="search-card mx-auto p-4 rounded-4" method="get" asp-controller="Home" asp-action="Index">
+                <div class="row g-3 text-dark text-end">
+                    <div class="col-12 col-md">
+                        <label class="form-label small fw-bold">السعر</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" class="form-control" placeholder="من" name="priceFrom" value="@ViewBag.PriceFrom" />
+                            <input type="number" class="form-control" placeholder="إلى" name="priceTo" value="@ViewBag.PriceTo" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md">
+                        <label class="form-label small fw-bold">نوع العقار</label>
+                        <select class="form-select" name="propertyType">
+                            <option value="الكل">الكل</option>
+                            <option value="شقة" selected="@(ViewBag.PropertyType == "شقة")">شقة</option>
+                            <option value="مشروع" selected="@(ViewBag.PropertyType == "مشروع")">مشروع</option>
+                            <option value="جراج" selected="@(ViewBag.PropertyType == "جراج")">جراج</option>
+                            <option value="أرض" selected="@(ViewBag.PropertyType == "أرض")">أرض</option>
+                            <option value="مكتب" selected="@(ViewBag.PropertyType == "مكتب")">مكتب</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md">
+                        <label class="form-label small fw-bold">طريقة السداد</label>
+                        <select class="form-select" name="paymentMethod">
+                            <option value="الكل">الكل</option>
+                            <option value="كاش" selected="@(ViewBag.PaymentMethod == "كاش")">كاش</option>
+                            <option value="تقسيط" selected="@(ViewBag.PaymentMethod == "تقسيط")">تقسيط</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md">
+                        <label class="form-label small fw-bold">التسليم في</label>
+                        <input type="date" class="form-control" name="deliveryDate" value="@(ViewBag.DeliveryDate?.ToString("yyyy-MM-dd"))" />
+                    </div>
+                    <div class="col-12 col-md">
+                        <label class="form-label small fw-bold">النشاط</label>
+                        <select class="form-select" name="activity">
+                            <option value="الكل">الكل</option>
+                            <option value="سكني" selected="@(ViewBag.Activity == "سكني")">سكني</option>
+                            <option value="تجاري" selected="@(ViewBag.Activity == "تجاري")">تجاري</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4 py-2 fw-bold">ابحث</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ====== قسم تعريفي باللوجو ====== -->
+<section class="intro-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-12 col-md-5 text-center">
+                <img src="~/images/intro-logo.jpg?v=2" alt="رواسي للتطوير العقاري" class="intro-photo" />
+            </div>
+            <div class="col-12 col-md-7">
+                <div class="intro-text-box">
+                    <h2 class="fw-bold">رواسي للتطوير العقاري</h2>
+                    <p>نقدم لك أفضل الوحدات السكنية والتجارية بأعلى جودة وأنسب الأسعار، مع تسهيلات في السداد ومواعيد تسليم مضمونة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== قسم لمسات إضافية ====== -->
+<section class="container py-5">
+    <h2 class="fw-bold mb-4 section-title">مميزاتنا</h2>
+    <div class="row g-4">
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-structure.png" class="feature-img-v" alt="الهيكل الإنشائي" />
+                <div class="feature-text-v"><p class="mb-0">جودة الهيكل الإنشائي هي أساس أمان بيتك.</p></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-foundation.jpg" class="feature-img-v" alt="الأساسات الهندسية" />
+                <div class="feature-text-v"><p class="mb-0">بني الثقة قبل الجدران.</p></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-smarthome.png" class="feature-img-v" alt="منازل ذكية" />
+                <div class="feature-text-v"><p class="mb-0">تقنيات ذكية تمنحك تحكمًا أكبر وراحة يومية.</p></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-family.png" class="feature-img-v" alt="راحة العائلة" />
+                <div class="feature-text-v"><p class="mb-0">مساحات مدروسة توفر الراحة لكل أفراد الأسرة.</p></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-location.png" class="feature-img-v" alt="مواقع مميزة" />
+                <div class="feature-text-v"><p class="mb-0">مواقع مميزة وتصميم عصري يناسب أسلوب حياتك.</p></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="feature-card-v">
+                <img src="~/images/feature-plants.png" class="feature-img-v" alt="تفاصيل منزلك" />
+                <div class="feature-text-v"><p class="mb-0">تفاصيل بسيطة تكمّل جمال بيتك من كل ناحية.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="feature-card">
+                <img src="~/images/feature-handshake.png" class="feature-img" alt="معاك خطوة بخطوة" />
+                <div class="feature-text">
+                    <h5 class="fw-bold">معاك من أول استفسار لحد استلام المفتاح</h5>
+                    <p class="text-muted mb-0">فريقنا بيرافقك في كل خطوة، من اختيار الوحدة المناسبة لحد ما تستلم مفتاح منزل أحلامك.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== قسم الوحدات المميزة ====== -->
+@if (ViewBag.FeaturedProperties != null && ViewBag.FeaturedProperties.Count > 0)
+{
+    <section class="container py-5">
+        <h2 class="fw-bold mb-4 section-title">⭐ وحدات مميزة</h2>
+
+        <div class="row g-4">
+            @foreach (var p in ViewBag.FeaturedProperties)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm property-card featured-card">
+                        @if (!string.IsNullOrEmpty(p.ImageUrl))
+                        {
+                            <div class="property-img-wrapper">
+                                <img src="@p.ImageUrl" class="card-img-top property-img" style="height:250px;" alt="@p.Title" />
+                            </div>
+                        }
+                        <a asp-controller="Properties" asp-action="Details" asp-route-id="@p.PropertyID" class="text-decoration-none text-dark">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <h5 class="fw-bold">@p.Title</h5>
+                                    <span class="badge bg-warning text-dark">⭐ مميزة</span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(p.Location))
+                                {
+                                    <p class="text-muted small mb-1">📍 @p.Location</p>
+                                }
+                                <p class="text-primary fw-bold mb-1">@p.Price.ToString("N0") ج.م</p>
+                                <p class="small mb-1">@p.PropertyType — @p.Activity</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+<!-- ====== قسم المشاريع الجديدة ====== -->
+<section class="container py-5" id="projects">
+    <h2 class="fw-bold mb-4 section-title">المشاريع الجديدة</h2>
+
+    <div class="row">
+        <div class="col-12 col-lg-9">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="alert alert-info">مفيش وحدات متاحة حالياً.</div>
+            }
+            else
+            {
+                <div class="row g-4">
+                    @{
+                        int idx = 0;
+                    }
+                    @foreach (var p in Model)
+                    {
+                        idx++;
+                        var colClass = idx == 1 ? "col-12 col-lg-8" : "col-12 col-md-6 col-lg-4";
+                        var imgHeight = idx == 1 ? "350px" : "250px";
+                        <div class="@colClass">
+                            <div class="card h-100 shadow-sm property-card">
+                                @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                {
+                                    <div class="property-img-wrapper">
+                                        <img src="@p.ImageUrl" class="card-img-top property-img" style="height:@imgHeight;" alt="@p.Title" />
+                                    </div>
+                                }
+                                <a asp-controller="Properties" asp-action="Details" asp-route-id="@p.PropertyID" class="text-decoration-none text-dark">
+                                    <div class="card-body">
+                                        <h5 class="fw-bold">@p.Title</h5>
+                                        @if (!string.IsNullOrEmpty(p.Location))
+                                        {
+                                            <p class="text-muted small mb-1">📍 @p.Location</p>
+                                        }
+                                        <p class="text-primary fw-bold mb-1">@p.Price.ToString("N0") ج.م</p>
+                                        <p class="small mb-1">@p.PropertyType — @p.Activity</p>
+                                        @if (!string.IsNullOrEmpty(p.PaymentMethod))
+                                        {
+                                            <p class="small mb-1">💳 @p.PaymentMethod</p>
+                                        }
+                                        @if (p.DeliveryDate.HasValue)
+                                        {
+                                            <p class="small text-muted">التسليم: @p.DeliveryDate.Value.ToString("yyyy-MM-dd")</p>
+                                        }
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="col-12 col-lg-3 mt-4 mt-lg-0">
+            <div class="filter-box p-3 rounded-4">
+                <h6 class="fw-bold mb-3">حالة المشروع</h6>
+                <div class="btn-group-toggle d-flex gap-2 mb-4 flex-wrap">
+                    <button class="btn btn-primary btn-sm flex-fill">الكل</button>
+                    <button class="btn btn-outline-secondary btn-sm flex-fill">جاهز</button>
+                    <button class="btn btn-outline-secondary btn-sm flex-fill">قيد التشغيل</button>
+                </div>
+
+                <h6 class="fw-bold mb-3">سكني</h6>
+                <div class="d-flex gap-2 mb-4 flex-wrap">
+                    <button class="btn btn-primary btn-sm">شقة</button>
+                    <button class="btn btn-outline-secondary btn-sm">أرض</button>
+                    <button class="btn btn-outline-secondary btn-sm">جراج</button>
+                </div>
+
+                <h6 class="fw-bold mb-3">تجاري</h6>
+                <div class="d-flex gap-2 mb-4 flex-wrap">
+                    <button class="btn btn-primary btn-sm">مكتب</button>
+                    <button class="btn btn-outline-secondary btn-sm">صيدلية</button>
+                    <button class="btn btn-outline-secondary btn-sm">جراج</button>
+                </div>
+
+                <h6 class="fw-bold mb-3">التسليم في</h6>
+                <div class="d-flex gap-2 mb-4 flex-wrap">
+                    <button class="btn btn-outline-secondary btn-sm">2024</button>
+                    <button class="btn btn-outline-secondary btn-sm">2025</button>
+                    <button class="btn btn-outline-secondary btn-sm">2026</button>
+                    <button class="btn btn-outline-secondary btn-sm">2027</button>
+                </div>
+
+                <h6 class="fw-bold mb-2">المقدم</h6>
+                <input type="range" class="form-range" min="0" max="1000000" step="10000" />
+                <p class="text-muted small">0 ج.م</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== بانر: استلم وحدتك ====== -->
+<section class="container mb-5" id="book-now">
+    <div class="cta-banner-full rounded-4 text-white text-center p-5">
+        <h2 class="fw-bold mb-2">استلم وحدتك</h2>
+        <p class="mb-4">احجز بيتك واضمن افضل مكان</p>
+
+        <a asp-controller="Booking" asp-action="Create" class="btn btn-light fw-bold px-4">عرض الآن</a>
+    </div>
+</section>
+
+<!-- ====== قسم التواصل ====== -->
+<section class="container mb-5">
+    <div class="contact-banner rounded-4 text-white p-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+            <h5 class="fw-bold mb-1">تواصل معنا</h5>
+            <p class="mb-0 small">نحن هنا لمساعدتك في العثور على منزل أحلامك</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="https://wa.me/201234567890" target="_blank" rel="noopener" class="btn btn-success">واتساب</a>
+            <a href="tel:01234567010" class="btn btn-outline-light">اتصل بنا</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @if (ViewBag.ScrollToProjects == true)
+    {
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var projectsSection = document.getElementById('projects');
+                if (projectsSection) {
+                    projectsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        </script>
+    }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.hero-slide');
+            let current = 0;
+
+            if (slides.length > 0) {
+                slides[0].classList.add('active');
+
+                setInterval(function () {
+                    slides[current].classList.remove('active');
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add('active');
+                }, 4000);
+            }
+        });
+    </script>
+}

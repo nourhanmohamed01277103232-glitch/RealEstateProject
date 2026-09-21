@@ -1,0 +1,373 @@
+:root {
+    --brand-blue: #0b1e6b;
+    --brand-blue-2: #1149c4;
+    --brand-teal: #14b8a6;
+    --brand-green: #25d366;
+}
+
+* {
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    background-image: none;
+}
+
+/* ====== الهيدر ====== */
+.site-header {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.site-header,
+header,
+.navbar {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.brand-icon {
+    font-size: 1.6rem;
+}
+
+/* ====== الشريط العلوي الشفاف ====== */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    background: transparent !important;
+    pointer-events: none;
+}
+
+    .top-bar > * {
+        pointer-events: auto;
+    }
+
+.top-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #f5f5f5 !important;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background-color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 25px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+    .top-phone:hover {
+        background-color: #333;
+        transform: translateY(-2px);
+    }
+
+    .top-phone svg {
+        color: #4CAF50;
+        flex-shrink: 0;
+    }
+
+.top-phone-number {
+    color: #f5f5f5 !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    direction: ltr;
+}
+
+.top-whatsapp {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+}
+
+    .top-whatsapp:hover {
+        transform: scale(1.15);
+    }
+
+/* ====== القائمة العائمة ====== */
+.floating-menu {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.95);
+    padding: 12px 10px;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 9998;
+}
+
+    .floating-menu a {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: #333;
+        padding: 6px 10px;
+        border-radius: 6px;
+        text-align: center;
+        transition: background 0.2s;
+    }
+
+        .floating-menu a:hover {
+            background: #f0f0f0;
+        }
+
+/* ====== قسم الهيرو ====== */
+.hero-section {
+    position: relative;
+    min-height: 800px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+}
+
+    .hero-slide.active {
+        opacity: 1;
+    }
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 700px;
+    background: rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-card {
+    background: #ffffff;
+    max-width: 1000px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.company-name-hero {
+    font-size: 2.2rem;
+    color: #f2c96b;
+    letter-spacing: 1px;
+}
+
+/* ====== الأقسام ====== */
+.section-title {
+    position: relative;
+    padding-bottom: .5rem;
+}
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--brand-teal);
+        border-radius: 4px;
+    }
+
+/* ====== قسم تعريفي ====== */
+.intro-section {
+    background: #ffffff;
+    padding: 3rem 0;
+}
+
+.intro-photo {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.intro-text-box {
+    background: transparent;
+    padding: 0 1rem;
+    box-shadow: none;
+}
+
+    .intro-text-box h2 {
+        font-size: 2.4rem;
+        color: #0b1e6b;
+        margin-bottom: 1.2rem;
+    }
+
+    .intro-text-box p {
+        color: #333 !important;
+        line-height: 2.2;
+        font-size: 1.15rem;
+    }
+
+/* ====== كروت المميزات ====== */
+.feature-card-v {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+    height: 100%;
+}
+
+.feature-img-v {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.feature-text-v {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+/* ====== الفلاتر ====== */
+.filter-box {
+    background: #f8f9fa;
+    border: 1px solid #eee;
+}
+
+/* ====== كارت الوحدة ====== */
+.property-card {
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .property-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+.property-img-wrapper {
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+}
+
+.property-img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.property-card:hover .property-img {
+    transform: scale(1.08);
+}
+
+/* كارت الوحدة المميزة */
+.featured-card {
+    border: 2px solid #ffc107;
+    border-radius: 18px;
+    position: relative;
+}
+
+    .featured-card::before {
+        content: "⭐";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ffc107;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+/* ====== بانر استلم وحدتك ====== */
+.cta-banner-full {
+    background-image: url('/images/feature-family.png?v=2');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+    .cta-banner-full::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    .cta-banner-full > * {
+        position: relative;
+        z-index: 2;
+    }
+
+/* ====== قسم التواصل ====== */
+.contact-banner {
+    background: var(--brand-blue);
+}
+
+/* ====== الفوتر ====== */
+.site-footer {
+    background: var(--brand-blue);
+}
+
+/* ====== اللوجو ====== */
+.brand-logo {
+    height: 48px;
+    width: auto;
+}
+
+.footer-logo {
+    height: 60px;
+    width: auto;
+}
+
+/* ====== زرار واتساب العائم ====== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: var(--brand-green);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    text-decoration: none;
+}
+
+    .whatsapp-float:hover {
+        color: #fff;
+        filter: brightness(1.05);
+    }

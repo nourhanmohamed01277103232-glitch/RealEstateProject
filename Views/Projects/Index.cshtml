@@ -1,0 +1,47 @@
+﻿@model List<RealEstateProject.Models.Project>
+
+@{
+    ViewData["Title"] = "المشاريع";
+}
+
+<h2>المشاريع</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">إضافة مشروع جديد</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>اسم المشروع</th>
+            <th>الموقع</th>
+            <th>نسبة الشركة</th>
+            <th>المبلغ المستثمر</th>
+            <th>طريقة الدفع</th>
+            <th>تاريخ البدء</th>
+            <th>الحالة</th>
+            <th>إجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td>@project.ProjectID</td>
+                <td>@project.ProjectName</td>
+                <td>@project.Location</td>
+                <td>@project.CompanySharePercentage%</td>
+                <td>@project.InvestedAmount.ToString("N2")</td>
+                <td>@project.PaymentMethod</td>
+                <td>@project.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@project.Status</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@project.ProjectID" class="btn btn-info btn-sm">تفاصيل</a>
+                    <a asp-action="Edit" asp-route-id="@project.ProjectID" class="btn btn-warning btn-sm">تعديل</a>
+                    <form asp-action="Delete" asp-route-id="@project.ProjectID" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('متأكد من الحذف؟')">حذف</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

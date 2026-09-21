@@ -1,0 +1,43 @@
+﻿@model List<RealEstateProject.Models.Partner>
+@{
+    ViewData["Title"] = "الشركاء";
+}
+
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold section-title mb-0">شركاء الشركة</h2>
+        <a asp-controller="Partners" asp-action="Create" class="btn btn-primary">+ إضافة شريك</a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var partner in Model)
+        {
+            <div class="col-md-6 col-lg-3">
+                <div class="partner-card p-4 rounded-4 text-center">
+                    <h5 class="fw-bold mb-2">@partner.Name</h5>
+                    <p class="partner-percentage mb-2">@partner.OwnershipPercentage.ToString("0.##")%</p>
+                    @if (!string.IsNullOrEmpty(partner.PhoneNumber))
+                    {
+                        <p class="text-muted small mb-3">@partner.PhoneNumber</p>
+                    }
+                    <hr />
+                    <p class="mb-1 small text-muted">إجمالي الإيداعات</p>
+                    <p class="fw-bold mb-2">@partner.TotalDeposits.ToString("N2") ج.م</p>
+                    <p class="mb-1 small text-muted">إجمالي المسحوبات</p>
+                    <p class="fw-bold mb-2">@partner.TotalWithdrawals.ToString("N2") ج.م</p>
+                    <hr />
+                    <p class="mb-1 small text-muted">الرصيد الصافي</p>
+                    <p class="fw-bold fs-5 mb-3 @(partner.NetBalance >= 0 ? "text-success" : "text-danger")">
+                        @partner.NetBalance.ToString("N2") ج.م
+                    </p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a asp-controller="Partners" asp-action="Edit" asp-route-id="@partner.PartnerID" class="btn btn-outline-primary btn-sm">تعديل</a>
+                        <form asp-controller="Partners" asp-action="Delete" asp-route-id="@partner.PartnerID" method="post" onsubmit="return confirm('متأكدة من حذف @partner.Name؟');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">حذف</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,35 @@
+﻿
+@model List<RealEstateProject.Models.ExpenseShare>
+@{
+    ViewData["Title"] = "توزيع الحصص";
+}
+
+<section class="container py-5">
+    <h2 class="fw-bold mb-2 section-title">توزيع حصص المصروف</h2>
+    @if (Model.Any())
+    {
+        <p class="text-muted mb-4">@Model.First().ExpenseDescription — @Model.First().ExpenseDate.ToString("yyyy-MM-dd")</p>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle bg-white">
+            <thead class="table-primary">
+                <tr>
+                    <th>الشريك</th>
+                    <th>نصيبه من المصروف</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.PartnerName</td>
+                        <td>@s.ShareAmount.ToString("N2") ج.م</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a asp-controller="Expenses" asp-action="Index" class="btn btn-outline-secondary mt-3">رجوع للمصروفات</a>
+</section>

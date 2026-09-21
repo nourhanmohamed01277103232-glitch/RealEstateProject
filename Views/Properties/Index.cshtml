@@ -1,0 +1,75 @@
+﻿@model List<RealEstateProject.Models.Property>
+@{
+    ViewData["Title"] = "إدارة الوحدات";
+}
+
+<section class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">إدارة الوحدات</h2>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-success">+ إضافة وحدة جديدة</a>
+        }
+    </div>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">مفيش وحدات مضافة حالياً.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle bg-white">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>الصورة</th>
+                        <th>العنوان</th>
+                        <th>النوع</th>
+                        <th>النشاط</th>
+                        <th>السعر</th>
+                        <th>الموقع</th>
+                        <th>متاح</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model)
+                    {
+                        <tr>
+                            <td>@p.PropertyID</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                {
+                                    <img src="@p.ImageUrl" style="height:50px;width:70px;object-fit:cover;" class="rounded" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">—</span>
+                                }
+                            </td>
+                            <td>@p.Title</td>
+                            <td>@p.PropertyType</td>
+                            <td>@p.Activity</td>
+                            <td>@p.Price.ToString("N0") ج.م</td>
+                            <td>@p.Location</td>
+                            <td>@(p.IsAvailable ? "✓" : "✗")</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@p.PropertyID" class="btn btn-info btn-sm">تفاصيل</a>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@p.PropertyID" class="btn btn-warning btn-sm">تعديل</a>
+                                    <form asp-action="Delete" asp-route-id="@p.PropertyID" method="post" style="display:inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('متأكد من الحذف؟')">حذف</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>

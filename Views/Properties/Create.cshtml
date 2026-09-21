@@ -1,0 +1,85 @@
+﻿@model RealEstateProject.Models.Property
+@{
+    ViewData["Title"] = "إضافة وحدة جديدة";
+}
+
+<section class="container py-5">
+    <h2 class="fw-bold mb-4">إضافة وحدة جديدة</h2>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">عنوان الوحدة *</label>
+                <input asp-for="Title" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">الموقع</label>
+                <input asp-for="Location" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label">نوع العقار *</label>
+                <select asp-for="PropertyType" class="form-select" required>
+                    <option value="">-- اختر --</option>
+                    <option value="شقة">شقة</option>
+                    <option value="مشروع">مشروع</option>
+                    <option value="جراج">جراج</option>
+                    <option value="أرض">أرض</option>
+                    <option value="مكتب">مكتب</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">النشاط *</label>
+                <select asp-for="Activity" class="form-select" required>
+                    <option value="">-- اختر --</option>
+                    <option value="سكني">سكني</option>
+                    <option value="تجاري">تجاري</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">طريقة السداد</label>
+                <select asp-for="PaymentMethod" class="form-select">
+                    <option value="">-- اختر --</option>
+                    <option value="كاش">كاش</option>
+                    <option value="تقسيط">تقسيط</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label class="form-label">السعر *</label>
+                <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">تاريخ التسليم</label>
+                <input asp-for="DeliveryDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">صورة الوحدة</label>
+                <input asp-for="ImageFile" type="file" accept="image/*" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">الوصف</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvailable" class="form-check-input" type="checkbox" checked />
+            <label class="form-check-label">متاحة للبيع/الإيجار</label>
+        </div>
+        <div class="mb-3 form-check">
+    <input asp-for="IsFeatured" class="form-check-input" type="checkbox" />
+    <label class="form-check-label">⭐ وحدة مميزة (تظهر في الصفحة الرئيسية)</label>
+</div>
+
+        <button type="submit" class="btn btn-success">حفظ</button>
+        <a asp-action="Index" class="btn btn-secondary">رجوع</a>
+    </form>
+</section>

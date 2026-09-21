@@ -1,0 +1,48 @@
+﻿@model RealEstateProject.Models.Project
+
+@{
+    ViewData["Title"] = "تفاصيل المشروع";
+    var installments = ViewBag.Installments as List<RealEstateProject.Models.ProjectInstallment>;
+}
+
+<h2>@Model.ProjectName</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>الموقع:</strong> @Model.Location</p>
+        <p><strong>نسبة الشركة:</strong> @Model.CompanySharePercentage%</p>
+        <p><strong>المبلغ المستثمر:</strong> @Model.InvestedAmount.ToString("N2")</p>
+        <p><strong>طريقة الدفع:</strong> @Model.PaymentMethod</p>
+        <p><strong>تاريخ البدء:</strong> @Model.StartDate.ToString("yyyy-MM-dd")</p>
+        <p><strong>الحالة:</strong> @Model.Status</p>
+        <p><strong>ملاحظات:</strong> @Model.Notes</p>
+    </div>
+</div>
+
+<h3>الأقساط</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>المبلغ</th>
+            <th>تاريخ الاستحقاق</th>
+            <th>تاريخ الدفع</th>
+            <th>الحالة</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (installments != null)
+        {
+            foreach (var inst in installments)
+            {
+                <tr>
+                    <td>@inst.Amount.ToString("N2")</td>
+                    <td>@inst.DueDate.ToString("yyyy-MM-dd")</td>
+                    <td>@(inst.PaidDate?.ToString("yyyy-MM-dd") ?? "-")</td>
+                    <td>@inst.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">رجوع</a>

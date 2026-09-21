@@ -1,0 +1,100 @@
+@model LedgerViewModel
+@{
+    ViewData["Title"] = "دفتر الأستاذ";
+}
+
+<section class="container py-5">
+    <h2 class="fw-bold mb-4 section-title">دفتر الأستاذ العام</h2>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+    else
+    {
+        <!-- حالة التوازن -->
+        <div class="alert @(Model.BalanceCheck.IsBalanced ? "alert-success" : "alert-danger") d-flex justify-content-between flex-wrap gap-2">
+            <span>إجمالي المدين: <strong>@Model.BalanceCheck.TotalDebit.ToString("N2")</strong></span>
+            <span>إجمالي الدائن: <strong>@Model.BalanceCheck.TotalCredit.ToString("N2")</strong></span>
+            <span>
+                الحالة:
+                <strong>@(Model.BalanceCheck.IsBalanced ? "متوازن ✓" : "غير متوازن ✗")</strong>
+            </span>
+        </div>
+
+        <!-- ميزان المراجعة -->
+        <h4 class="fw-bold mt-5 mb-3">ميزان المراجعة</h4>
+        <div class="table-responsive mb-5">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>كود</th>
+                        <th>الحساب</th>
+                        <th>مدين</th>
+                        <th>دائن</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model.TrialBalance)
+                    {
+                        <tr>
+                            <td>@row.AccountCode</td>
+                            <td>@row.AccountName</td>
+                            <td>@row.TotalDebit.ToString("N2")</td>
+                            <td>@row.TotalCredit.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- دفتر الأستاذ التفصيلي -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">دفتر الأستاذ التفصيلي (كل الحركات)</h4>
+            <a asp-action="Create" class="btn btn-success">+ إضافة قيد جديد</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>رقم القيد</th>
+                        <th>التاريخ</th>
+                        <th>كود الحساب</th>
+                        <th>اسم الحساب</th>
+                        <th>نوع الحساب</th>
+                        <th>البيان</th>
+                        <th>المرجع</th>
+                        <th>مدين</th>
+                        <th>دائن</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Lines)
+                    {
+                        <tr>
+                            <td>@line.EntryNumber</td>
+                            <td>@line.TransactionDate.ToString("yyyy-MM-dd")</td>
+                            <td>@line.AccountCode</td>
+                            <td>@line.AccountName</td>
+                            <td>@line.AccountType</td>
+                            <td>@line.Description</td>
+                            <td>@line.Reference</td>
+                            <td>@line.Debit.ToString("N2")</td>
+                            <td>@line.Credit.ToString("N2")</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-entryNumber="@line.EntryNumber" class="btn btn-warning btn-sm">تعديل</a>
+                                <form asp-action="Delete" asp-route-entryNumber="@line.EntryNumber" method="post" style="display:inline">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('متأكد من حذف القيد كامل؟')">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</section>
+
+

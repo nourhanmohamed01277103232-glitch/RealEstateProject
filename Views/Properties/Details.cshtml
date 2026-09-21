@@ -1,0 +1,54 @@
+﻿@model RealEstateProject.Models.Property
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="container py-5">
+    <div class="row">
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" class="img-fluid rounded shadow" alt="@Model.Title" />
+            }
+            else
+            {
+                <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:400px;">
+                    <span class="text-muted">لا توجد صورة</span>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="fw-bold">@Model.Title</h2>
+
+            @if (!string.IsNullOrEmpty(Model.Location))
+            {
+                <p class="text-muted">📍 @Model.Location</p>
+            }
+
+            <hr />
+
+            <p><strong>نوع العقار:</strong> @Model.PropertyType</p>
+            <p><strong>النشاط:</strong> @Model.Activity</p>
+            <p><strong>طريقة السداد:</strong> @Model.PaymentMethod</p>
+
+            @if (Model.DeliveryDate.HasValue)
+            {
+                <p><strong>تاريخ التسليم:</strong> @Model.DeliveryDate.Value.ToString("yyyy-MM-dd")</p>
+            }
+
+            <h3 class="text-primary fw-bold my-3">@Model.Price.ToString("N0") ج.م</h3>
+
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <p><strong>الوصف:</strong></p>
+                <p>@Model.Description</p>
+            }
+
+            <div class="mt-4">
+                <a asp-controller="Booking" asp-action="Create" asp-route-propertyId="@Model.PropertyID" class="btn btn-success btn-lg">احجز هذه الوحدة</a>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-lg">رجوع</a>
+            </div>
+        </div>
+    </div>
+</section>
